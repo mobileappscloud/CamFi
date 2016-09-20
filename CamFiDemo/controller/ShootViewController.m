@@ -9,7 +9,7 @@
 #import "ShootViewController.h"
 #import "CamFiAPI.h"
 #import "Utils.h"
-
+#import "RootViewController.m"
 @interface ShootViewController ()
 
 @end
@@ -47,6 +47,9 @@
             NSData *imageData = [NSData dataWithData:responseObject];
             UIImage *image = [UIImage imageWithData:imageData];
             self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+            
+            RootViewController *rvc = [[RootViewController alloc] init];
+            [rvc.photos addObject:image];
         }
     }];
 }
