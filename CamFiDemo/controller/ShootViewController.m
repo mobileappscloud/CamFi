@@ -26,17 +26,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)shootButtonPressed:(id)sender {
+- (IBAction)shootButtonPressed:(id)sender
+{
     
-    [CamFiAPI camFiTakePicture:^(NSError *error, id responseObject) {
-        
-        if (error) {
+    [CamFiAPI camFiTakePicture:^(NSError *error, id responseObject)
+    {
+        if (error)
+        {
             
             AFLogDebug(@"error:%@", error);
         }
-        else {
+        
+        else
+        {
             
             AFLogDebug(@"responseObject:%@", responseObject);
+            
+            //We were able to successfully take the picture
+            
+            NSData *imageData = [NSData dataWithData:responseObject];
+            UIImage *image = [UIImage imageWithData:imageData];
+            self.view.backgroundColor = [UIColor colorWithPatternImage:image];
         }
     }];
 }
